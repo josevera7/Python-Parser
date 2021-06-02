@@ -1,0 +1,1590 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Exp
+Rule 1     Exp -> Term Binop Exp
+Rule 2     Exp -> Term
+Rule 3     Exp -> IF Exp THEN Exp ELSE Exp
+Rule 4     Exp -> LET DefPlus IN Exp
+Rule 5     Exp -> MAP IdList TO Exp
+Rule 6     Term -> Bool
+Rule 7     Term -> Unop Term
+Rule 8     Term -> Factor LEFTPAREN ExpList RIGHTPAREN
+Rule 9     Term -> Factor
+Rule 10    Term -> Int
+Rule 11    Term -> empty
+Rule 12    Factor -> LEFTPAREN Exp RIGHTPAREN
+Rule 13    Factor -> Prim
+Rule 14    Factor -> Id
+Rule 15    ExpList -> PropExpList
+Rule 16    ExpList -> empty
+Rule 17    PropExpList -> Exp COMA PropExpList
+Rule 18    PropExpList -> Exp
+Rule 19    IdList -> PropIdList
+Rule 20    IdList -> empty
+Rule 21    PropIdList -> Id COMA PropIdList
+Rule 22    PropIdList -> Id
+Rule 23    Def -> Id ASSIGN Exp SEMICOLON
+Rule 24    DefPlus -> DefPlus Def
+Rule 25    DefPlus -> Def
+Rule 26    Bool -> BOOLEANS
+Rule 27    Unop -> Sign
+Rule 28    Unop -> WAVE
+Rule 29    Sign -> SIGNS
+Rule 30    Binop -> Sign
+Rule 31    Binop -> BINOPS
+Rule 32    Prim -> PRIMWORDS
+Rule 33    Id -> CHARACTER Chagit
+Rule 34    Id -> CHARACTER
+Rule 35    Chagit -> Chagit CHARACTER
+Rule 36    Chagit -> Chagit DIGIT
+Rule 37    Chagit -> CHARACTER
+Rule 38    Chagit -> DIGIT
+Rule 39    Chagit -> empty
+Rule 40    Int -> DigitPlus
+Rule 41    DigitPlus -> DIGIT DigitPlus
+Rule 42    DigitPlus -> DIGIT
+Rule 43    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ASSIGN               : 23
+BINOPS               : 31
+BOOLEANS             : 26
+CHARACTER            : 33 34 35 37
+COMA                 : 17 21
+DIGIT                : 36 38 41 42
+ELSE                 : 3
+IF                   : 3
+IN                   : 4
+LEFTPAREN            : 8 12
+LET                  : 4
+MAP                  : 5
+PRIMWORDS            : 32
+RIGHTPAREN           : 8 12
+SEMICOLON            : 23
+SIGNS                : 29
+THEN                 : 3
+TO                   : 5
+WAVE                 : 28
+error                : 
+
+Nonterminals, with rules where they appear
+
+Binop                : 1
+Bool                 : 6
+Chagit               : 33 35 36
+Def                  : 24 25
+DefPlus              : 4 24
+DigitPlus            : 40 41
+Exp                  : 1 3 3 3 4 5 12 17 18 23 0
+ExpList              : 8
+Factor               : 8 9
+Id                   : 14 21 22 23
+IdList               : 5
+Int                  : 10
+Prim                 : 13
+PropExpList          : 15 17
+PropIdList           : 19 21
+Sign                 : 27 30
+Term                 : 1 2 7
+Unop                 : 7
+empty                : 11 16 20 39
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Exp
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    $end            reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Exp                            shift and go to state 1
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 1
+
+    (0) S' -> Exp .
+
+
+
+state 2
+
+    (1) Exp -> Term . Binop Exp
+    (2) Exp -> Term .
+    (30) Binop -> . Sign
+    (31) Binop -> . BINOPS
+    (29) Sign -> . SIGNS
+
+    $end            reduce using rule 2 (Exp -> Term .)
+    THEN            reduce using rule 2 (Exp -> Term .)
+    RIGHTPAREN      reduce using rule 2 (Exp -> Term .)
+    COMA            reduce using rule 2 (Exp -> Term .)
+    ELSE            reduce using rule 2 (Exp -> Term .)
+    SEMICOLON       reduce using rule 2 (Exp -> Term .)
+    BINOPS          shift and go to state 24
+    SIGNS           shift and go to state 18
+
+    Binop                          shift and go to state 22
+    Sign                           shift and go to state 23
+
+state 3
+
+    (3) Exp -> IF . Exp THEN Exp ELSE Exp
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    THEN            reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Exp                            shift and go to state 25
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 4
+
+    (4) Exp -> LET . DefPlus IN Exp
+    (24) DefPlus -> . DefPlus Def
+    (25) DefPlus -> . Def
+    (23) Def -> . Id ASSIGN Exp SEMICOLON
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+
+    CHARACTER       shift and go to state 20
+
+    DefPlus                        shift and go to state 26
+    Def                            shift and go to state 27
+    Id                             shift and go to state 28
+
+state 5
+
+    (5) Exp -> MAP . IdList TO Exp
+    (19) IdList -> . PropIdList
+    (20) IdList -> . empty
+    (21) PropIdList -> . Id COMA PropIdList
+    (22) PropIdList -> . Id
+    (43) empty -> .
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+
+    TO              reduce using rule 43 (empty -> .)
+    CHARACTER       shift and go to state 20
+
+    IdList                         shift and go to state 29
+    PropIdList                     shift and go to state 30
+    empty                          shift and go to state 31
+    Id                             shift and go to state 32
+
+state 6
+
+    (6) Term -> Bool .
+
+    BINOPS          reduce using rule 6 (Term -> Bool .)
+    SIGNS           reduce using rule 6 (Term -> Bool .)
+    $end            reduce using rule 6 (Term -> Bool .)
+    THEN            reduce using rule 6 (Term -> Bool .)
+    RIGHTPAREN      reduce using rule 6 (Term -> Bool .)
+    COMA            reduce using rule 6 (Term -> Bool .)
+    ELSE            reduce using rule 6 (Term -> Bool .)
+    SEMICOLON       reduce using rule 6 (Term -> Bool .)
+
+
+state 7
+
+    (7) Term -> Unop . Term
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    $end            reduce using rule 43 (empty -> .)
+    THEN            reduce using rule 43 (empty -> .)
+    RIGHTPAREN      reduce using rule 43 (empty -> .)
+    COMA            reduce using rule 43 (empty -> .)
+    ELSE            reduce using rule 43 (empty -> .)
+    SEMICOLON       reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Unop                           shift and go to state 7
+    Term                           shift and go to state 33
+    Bool                           shift and go to state 6
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 8
+
+    (8) Term -> Factor . LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> Factor .
+
+    LEFTPAREN       shift and go to state 34
+    BINOPS          reduce using rule 9 (Term -> Factor .)
+    SIGNS           reduce using rule 9 (Term -> Factor .)
+    $end            reduce using rule 9 (Term -> Factor .)
+    THEN            reduce using rule 9 (Term -> Factor .)
+    RIGHTPAREN      reduce using rule 9 (Term -> Factor .)
+    COMA            reduce using rule 9 (Term -> Factor .)
+    ELSE            reduce using rule 9 (Term -> Factor .)
+    SEMICOLON       reduce using rule 9 (Term -> Factor .)
+
+
+state 9
+
+    (12) Factor -> LEFTPAREN . Exp RIGHTPAREN
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    RIGHTPAREN      reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Exp                            shift and go to state 35
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 10
+
+    (10) Term -> Int .
+
+    BINOPS          reduce using rule 10 (Term -> Int .)
+    SIGNS           reduce using rule 10 (Term -> Int .)
+    $end            reduce using rule 10 (Term -> Int .)
+    THEN            reduce using rule 10 (Term -> Int .)
+    RIGHTPAREN      reduce using rule 10 (Term -> Int .)
+    COMA            reduce using rule 10 (Term -> Int .)
+    ELSE            reduce using rule 10 (Term -> Int .)
+    SEMICOLON       reduce using rule 10 (Term -> Int .)
+
+
+state 11
+
+    (11) Term -> empty .
+
+    BINOPS          reduce using rule 11 (Term -> empty .)
+    SIGNS           reduce using rule 11 (Term -> empty .)
+    $end            reduce using rule 11 (Term -> empty .)
+    THEN            reduce using rule 11 (Term -> empty .)
+    RIGHTPAREN      reduce using rule 11 (Term -> empty .)
+    COMA            reduce using rule 11 (Term -> empty .)
+    ELSE            reduce using rule 11 (Term -> empty .)
+    SEMICOLON       reduce using rule 11 (Term -> empty .)
+
+
+state 12
+
+    (26) Bool -> BOOLEANS .
+
+    BINOPS          reduce using rule 26 (Bool -> BOOLEANS .)
+    SIGNS           reduce using rule 26 (Bool -> BOOLEANS .)
+    $end            reduce using rule 26 (Bool -> BOOLEANS .)
+    THEN            reduce using rule 26 (Bool -> BOOLEANS .)
+    RIGHTPAREN      reduce using rule 26 (Bool -> BOOLEANS .)
+    COMA            reduce using rule 26 (Bool -> BOOLEANS .)
+    ELSE            reduce using rule 26 (Bool -> BOOLEANS .)
+    SEMICOLON       reduce using rule 26 (Bool -> BOOLEANS .)
+
+
+state 13
+
+    (27) Unop -> Sign .
+
+    BOOLEANS        reduce using rule 27 (Unop -> Sign .)
+    WAVE            reduce using rule 27 (Unop -> Sign .)
+    LEFTPAREN       reduce using rule 27 (Unop -> Sign .)
+    SIGNS           reduce using rule 27 (Unop -> Sign .)
+    PRIMWORDS       reduce using rule 27 (Unop -> Sign .)
+    CHARACTER       reduce using rule 27 (Unop -> Sign .)
+    DIGIT           reduce using rule 27 (Unop -> Sign .)
+    BINOPS          reduce using rule 27 (Unop -> Sign .)
+    $end            reduce using rule 27 (Unop -> Sign .)
+    THEN            reduce using rule 27 (Unop -> Sign .)
+    RIGHTPAREN      reduce using rule 27 (Unop -> Sign .)
+    COMA            reduce using rule 27 (Unop -> Sign .)
+    ELSE            reduce using rule 27 (Unop -> Sign .)
+    SEMICOLON       reduce using rule 27 (Unop -> Sign .)
+
+
+state 14
+
+    (28) Unop -> WAVE .
+
+    BOOLEANS        reduce using rule 28 (Unop -> WAVE .)
+    WAVE            reduce using rule 28 (Unop -> WAVE .)
+    LEFTPAREN       reduce using rule 28 (Unop -> WAVE .)
+    SIGNS           reduce using rule 28 (Unop -> WAVE .)
+    PRIMWORDS       reduce using rule 28 (Unop -> WAVE .)
+    CHARACTER       reduce using rule 28 (Unop -> WAVE .)
+    DIGIT           reduce using rule 28 (Unop -> WAVE .)
+    BINOPS          reduce using rule 28 (Unop -> WAVE .)
+    $end            reduce using rule 28 (Unop -> WAVE .)
+    THEN            reduce using rule 28 (Unop -> WAVE .)
+    RIGHTPAREN      reduce using rule 28 (Unop -> WAVE .)
+    COMA            reduce using rule 28 (Unop -> WAVE .)
+    ELSE            reduce using rule 28 (Unop -> WAVE .)
+    SEMICOLON       reduce using rule 28 (Unop -> WAVE .)
+
+
+state 15
+
+    (13) Factor -> Prim .
+
+    LEFTPAREN       reduce using rule 13 (Factor -> Prim .)
+    BINOPS          reduce using rule 13 (Factor -> Prim .)
+    SIGNS           reduce using rule 13 (Factor -> Prim .)
+    $end            reduce using rule 13 (Factor -> Prim .)
+    THEN            reduce using rule 13 (Factor -> Prim .)
+    RIGHTPAREN      reduce using rule 13 (Factor -> Prim .)
+    COMA            reduce using rule 13 (Factor -> Prim .)
+    ELSE            reduce using rule 13 (Factor -> Prim .)
+    SEMICOLON       reduce using rule 13 (Factor -> Prim .)
+
+
+state 16
+
+    (14) Factor -> Id .
+
+    LEFTPAREN       reduce using rule 14 (Factor -> Id .)
+    BINOPS          reduce using rule 14 (Factor -> Id .)
+    SIGNS           reduce using rule 14 (Factor -> Id .)
+    $end            reduce using rule 14 (Factor -> Id .)
+    THEN            reduce using rule 14 (Factor -> Id .)
+    RIGHTPAREN      reduce using rule 14 (Factor -> Id .)
+    COMA            reduce using rule 14 (Factor -> Id .)
+    ELSE            reduce using rule 14 (Factor -> Id .)
+    SEMICOLON       reduce using rule 14 (Factor -> Id .)
+
+
+state 17
+
+    (40) Int -> DigitPlus .
+
+    BINOPS          reduce using rule 40 (Int -> DigitPlus .)
+    SIGNS           reduce using rule 40 (Int -> DigitPlus .)
+    $end            reduce using rule 40 (Int -> DigitPlus .)
+    THEN            reduce using rule 40 (Int -> DigitPlus .)
+    RIGHTPAREN      reduce using rule 40 (Int -> DigitPlus .)
+    COMA            reduce using rule 40 (Int -> DigitPlus .)
+    ELSE            reduce using rule 40 (Int -> DigitPlus .)
+    SEMICOLON       reduce using rule 40 (Int -> DigitPlus .)
+
+
+state 18
+
+    (29) Sign -> SIGNS .
+
+    BOOLEANS        reduce using rule 29 (Sign -> SIGNS .)
+    WAVE            reduce using rule 29 (Sign -> SIGNS .)
+    LEFTPAREN       reduce using rule 29 (Sign -> SIGNS .)
+    SIGNS           reduce using rule 29 (Sign -> SIGNS .)
+    PRIMWORDS       reduce using rule 29 (Sign -> SIGNS .)
+    CHARACTER       reduce using rule 29 (Sign -> SIGNS .)
+    DIGIT           reduce using rule 29 (Sign -> SIGNS .)
+    BINOPS          reduce using rule 29 (Sign -> SIGNS .)
+    $end            reduce using rule 29 (Sign -> SIGNS .)
+    IF              reduce using rule 29 (Sign -> SIGNS .)
+    LET             reduce using rule 29 (Sign -> SIGNS .)
+    MAP             reduce using rule 29 (Sign -> SIGNS .)
+    THEN            reduce using rule 29 (Sign -> SIGNS .)
+    RIGHTPAREN      reduce using rule 29 (Sign -> SIGNS .)
+    COMA            reduce using rule 29 (Sign -> SIGNS .)
+    ELSE            reduce using rule 29 (Sign -> SIGNS .)
+    SEMICOLON       reduce using rule 29 (Sign -> SIGNS .)
+
+
+state 19
+
+    (32) Prim -> PRIMWORDS .
+
+    LEFTPAREN       reduce using rule 32 (Prim -> PRIMWORDS .)
+    BINOPS          reduce using rule 32 (Prim -> PRIMWORDS .)
+    SIGNS           reduce using rule 32 (Prim -> PRIMWORDS .)
+    $end            reduce using rule 32 (Prim -> PRIMWORDS .)
+    THEN            reduce using rule 32 (Prim -> PRIMWORDS .)
+    RIGHTPAREN      reduce using rule 32 (Prim -> PRIMWORDS .)
+    COMA            reduce using rule 32 (Prim -> PRIMWORDS .)
+    ELSE            reduce using rule 32 (Prim -> PRIMWORDS .)
+    SEMICOLON       reduce using rule 32 (Prim -> PRIMWORDS .)
+
+
+state 20
+
+    (33) Id -> CHARACTER . Chagit
+    (34) Id -> CHARACTER .
+    (35) Chagit -> . Chagit CHARACTER
+    (36) Chagit -> . Chagit DIGIT
+    (37) Chagit -> . CHARACTER
+    (38) Chagit -> . DIGIT
+    (39) Chagit -> . empty
+    (43) empty -> .
+
+  ! shift/reduce conflict for CHARACTER resolved as shift
+  ! shift/reduce conflict for DIGIT resolved as shift
+  ! reduce/reduce conflict for LEFTPAREN resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for BINOPS resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for SIGNS resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for $end resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for THEN resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for ASSIGN resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for COMA resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for TO resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for RIGHTPAREN resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for ELSE resolved using rule 34 (Id -> CHARACTER .)
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 34 (Id -> CHARACTER .)
+    LEFTPAREN       reduce using rule 34 (Id -> CHARACTER .)
+    BINOPS          reduce using rule 34 (Id -> CHARACTER .)
+    SIGNS           reduce using rule 34 (Id -> CHARACTER .)
+    $end            reduce using rule 34 (Id -> CHARACTER .)
+    THEN            reduce using rule 34 (Id -> CHARACTER .)
+    ASSIGN          reduce using rule 34 (Id -> CHARACTER .)
+    COMA            reduce using rule 34 (Id -> CHARACTER .)
+    TO              reduce using rule 34 (Id -> CHARACTER .)
+    RIGHTPAREN      reduce using rule 34 (Id -> CHARACTER .)
+    ELSE            reduce using rule 34 (Id -> CHARACTER .)
+    SEMICOLON       reduce using rule 34 (Id -> CHARACTER .)
+    CHARACTER       shift and go to state 36
+    DIGIT           shift and go to state 38
+
+  ! CHARACTER       [ reduce using rule 43 (empty -> .) ]
+  ! DIGIT           [ reduce using rule 43 (empty -> .) ]
+  ! LEFTPAREN       [ reduce using rule 43 (empty -> .) ]
+  ! BINOPS          [ reduce using rule 43 (empty -> .) ]
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+  ! $end            [ reduce using rule 43 (empty -> .) ]
+  ! THEN            [ reduce using rule 43 (empty -> .) ]
+  ! ASSIGN          [ reduce using rule 43 (empty -> .) ]
+  ! COMA            [ reduce using rule 43 (empty -> .) ]
+  ! TO              [ reduce using rule 43 (empty -> .) ]
+  ! RIGHTPAREN      [ reduce using rule 43 (empty -> .) ]
+  ! ELSE            [ reduce using rule 43 (empty -> .) ]
+  ! SEMICOLON       [ reduce using rule 43 (empty -> .) ]
+
+    Chagit                         shift and go to state 37
+    empty                          shift and go to state 39
+
+state 21
+
+    (41) DigitPlus -> DIGIT . DigitPlus
+    (42) DigitPlus -> DIGIT .
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+    BINOPS          reduce using rule 42 (DigitPlus -> DIGIT .)
+    SIGNS           reduce using rule 42 (DigitPlus -> DIGIT .)
+    $end            reduce using rule 42 (DigitPlus -> DIGIT .)
+    THEN            reduce using rule 42 (DigitPlus -> DIGIT .)
+    RIGHTPAREN      reduce using rule 42 (DigitPlus -> DIGIT .)
+    COMA            reduce using rule 42 (DigitPlus -> DIGIT .)
+    ELSE            reduce using rule 42 (DigitPlus -> DIGIT .)
+    SEMICOLON       reduce using rule 42 (DigitPlus -> DIGIT .)
+    DIGIT           shift and go to state 21
+
+    DigitPlus                      shift and go to state 40
+
+state 22
+
+    (1) Exp -> Term Binop . Exp
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    $end            reduce using rule 43 (empty -> .)
+    THEN            reduce using rule 43 (empty -> .)
+    RIGHTPAREN      reduce using rule 43 (empty -> .)
+    COMA            reduce using rule 43 (empty -> .)
+    ELSE            reduce using rule 43 (empty -> .)
+    SEMICOLON       reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Term                           shift and go to state 2
+    Exp                            shift and go to state 41
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 23
+
+    (30) Binop -> Sign .
+
+    IF              reduce using rule 30 (Binop -> Sign .)
+    LET             reduce using rule 30 (Binop -> Sign .)
+    MAP             reduce using rule 30 (Binop -> Sign .)
+    BOOLEANS        reduce using rule 30 (Binop -> Sign .)
+    WAVE            reduce using rule 30 (Binop -> Sign .)
+    LEFTPAREN       reduce using rule 30 (Binop -> Sign .)
+    SIGNS           reduce using rule 30 (Binop -> Sign .)
+    PRIMWORDS       reduce using rule 30 (Binop -> Sign .)
+    CHARACTER       reduce using rule 30 (Binop -> Sign .)
+    DIGIT           reduce using rule 30 (Binop -> Sign .)
+    BINOPS          reduce using rule 30 (Binop -> Sign .)
+    $end            reduce using rule 30 (Binop -> Sign .)
+    THEN            reduce using rule 30 (Binop -> Sign .)
+    RIGHTPAREN      reduce using rule 30 (Binop -> Sign .)
+    COMA            reduce using rule 30 (Binop -> Sign .)
+    ELSE            reduce using rule 30 (Binop -> Sign .)
+    SEMICOLON       reduce using rule 30 (Binop -> Sign .)
+
+
+state 24
+
+    (31) Binop -> BINOPS .
+
+    IF              reduce using rule 31 (Binop -> BINOPS .)
+    LET             reduce using rule 31 (Binop -> BINOPS .)
+    MAP             reduce using rule 31 (Binop -> BINOPS .)
+    BOOLEANS        reduce using rule 31 (Binop -> BINOPS .)
+    WAVE            reduce using rule 31 (Binop -> BINOPS .)
+    LEFTPAREN       reduce using rule 31 (Binop -> BINOPS .)
+    SIGNS           reduce using rule 31 (Binop -> BINOPS .)
+    PRIMWORDS       reduce using rule 31 (Binop -> BINOPS .)
+    CHARACTER       reduce using rule 31 (Binop -> BINOPS .)
+    DIGIT           reduce using rule 31 (Binop -> BINOPS .)
+    BINOPS          reduce using rule 31 (Binop -> BINOPS .)
+    $end            reduce using rule 31 (Binop -> BINOPS .)
+    THEN            reduce using rule 31 (Binop -> BINOPS .)
+    RIGHTPAREN      reduce using rule 31 (Binop -> BINOPS .)
+    COMA            reduce using rule 31 (Binop -> BINOPS .)
+    ELSE            reduce using rule 31 (Binop -> BINOPS .)
+    SEMICOLON       reduce using rule 31 (Binop -> BINOPS .)
+
+
+state 25
+
+    (3) Exp -> IF Exp . THEN Exp ELSE Exp
+
+    THEN            shift and go to state 42
+
+
+state 26
+
+    (4) Exp -> LET DefPlus . IN Exp
+    (24) DefPlus -> DefPlus . Def
+    (23) Def -> . Id ASSIGN Exp SEMICOLON
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+
+    IN              shift and go to state 43
+    CHARACTER       shift and go to state 20
+
+    Def                            shift and go to state 44
+    Id                             shift and go to state 28
+
+state 27
+
+    (25) DefPlus -> Def .
+
+    IN              reduce using rule 25 (DefPlus -> Def .)
+    CHARACTER       reduce using rule 25 (DefPlus -> Def .)
+
+
+state 28
+
+    (23) Def -> Id . ASSIGN Exp SEMICOLON
+
+    ASSIGN          shift and go to state 45
+
+
+state 29
+
+    (5) Exp -> MAP IdList . TO Exp
+
+    TO              shift and go to state 46
+
+
+state 30
+
+    (19) IdList -> PropIdList .
+
+    TO              reduce using rule 19 (IdList -> PropIdList .)
+
+
+state 31
+
+    (20) IdList -> empty .
+
+    TO              reduce using rule 20 (IdList -> empty .)
+
+
+state 32
+
+    (21) PropIdList -> Id . COMA PropIdList
+    (22) PropIdList -> Id .
+
+    COMA            shift and go to state 47
+    TO              reduce using rule 22 (PropIdList -> Id .)
+
+
+state 33
+
+    (7) Term -> Unop Term .
+
+    BINOPS          reduce using rule 7 (Term -> Unop Term .)
+    SIGNS           reduce using rule 7 (Term -> Unop Term .)
+    $end            reduce using rule 7 (Term -> Unop Term .)
+    THEN            reduce using rule 7 (Term -> Unop Term .)
+    RIGHTPAREN      reduce using rule 7 (Term -> Unop Term .)
+    COMA            reduce using rule 7 (Term -> Unop Term .)
+    ELSE            reduce using rule 7 (Term -> Unop Term .)
+    SEMICOLON       reduce using rule 7 (Term -> Unop Term .)
+
+
+state 34
+
+    (8) Term -> Factor LEFTPAREN . ExpList RIGHTPAREN
+    (15) ExpList -> . PropExpList
+    (16) ExpList -> . empty
+    (17) PropExpList -> . Exp COMA PropExpList
+    (18) PropExpList -> . Exp
+    (43) empty -> .
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    RIGHTPAREN      reduce using rule 43 (empty -> .)
+    BINOPS          reduce using rule 43 (empty -> .)
+    COMA            reduce using rule 43 (empty -> .)
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Factor                         shift and go to state 8
+    ExpList                        shift and go to state 48
+    PropExpList                    shift and go to state 49
+    empty                          shift and go to state 50
+    Exp                            shift and go to state 51
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Int                            shift and go to state 10
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 35
+
+    (12) Factor -> LEFTPAREN Exp . RIGHTPAREN
+
+    RIGHTPAREN      shift and go to state 52
+
+
+state 36
+
+    (37) Chagit -> CHARACTER .
+
+    CHARACTER       reduce using rule 37 (Chagit -> CHARACTER .)
+    DIGIT           reduce using rule 37 (Chagit -> CHARACTER .)
+    LEFTPAREN       reduce using rule 37 (Chagit -> CHARACTER .)
+    BINOPS          reduce using rule 37 (Chagit -> CHARACTER .)
+    SIGNS           reduce using rule 37 (Chagit -> CHARACTER .)
+    $end            reduce using rule 37 (Chagit -> CHARACTER .)
+    THEN            reduce using rule 37 (Chagit -> CHARACTER .)
+    ASSIGN          reduce using rule 37 (Chagit -> CHARACTER .)
+    COMA            reduce using rule 37 (Chagit -> CHARACTER .)
+    TO              reduce using rule 37 (Chagit -> CHARACTER .)
+    RIGHTPAREN      reduce using rule 37 (Chagit -> CHARACTER .)
+    ELSE            reduce using rule 37 (Chagit -> CHARACTER .)
+    SEMICOLON       reduce using rule 37 (Chagit -> CHARACTER .)
+
+
+state 37
+
+    (33) Id -> CHARACTER Chagit .
+    (35) Chagit -> Chagit . CHARACTER
+    (36) Chagit -> Chagit . DIGIT
+
+    LEFTPAREN       reduce using rule 33 (Id -> CHARACTER Chagit .)
+    BINOPS          reduce using rule 33 (Id -> CHARACTER Chagit .)
+    SIGNS           reduce using rule 33 (Id -> CHARACTER Chagit .)
+    $end            reduce using rule 33 (Id -> CHARACTER Chagit .)
+    THEN            reduce using rule 33 (Id -> CHARACTER Chagit .)
+    ASSIGN          reduce using rule 33 (Id -> CHARACTER Chagit .)
+    COMA            reduce using rule 33 (Id -> CHARACTER Chagit .)
+    TO              reduce using rule 33 (Id -> CHARACTER Chagit .)
+    RIGHTPAREN      reduce using rule 33 (Id -> CHARACTER Chagit .)
+    ELSE            reduce using rule 33 (Id -> CHARACTER Chagit .)
+    SEMICOLON       reduce using rule 33 (Id -> CHARACTER Chagit .)
+    CHARACTER       shift and go to state 53
+    DIGIT           shift and go to state 54
+
+
+state 38
+
+    (38) Chagit -> DIGIT .
+
+    CHARACTER       reduce using rule 38 (Chagit -> DIGIT .)
+    DIGIT           reduce using rule 38 (Chagit -> DIGIT .)
+    LEFTPAREN       reduce using rule 38 (Chagit -> DIGIT .)
+    BINOPS          reduce using rule 38 (Chagit -> DIGIT .)
+    SIGNS           reduce using rule 38 (Chagit -> DIGIT .)
+    $end            reduce using rule 38 (Chagit -> DIGIT .)
+    THEN            reduce using rule 38 (Chagit -> DIGIT .)
+    ASSIGN          reduce using rule 38 (Chagit -> DIGIT .)
+    COMA            reduce using rule 38 (Chagit -> DIGIT .)
+    TO              reduce using rule 38 (Chagit -> DIGIT .)
+    RIGHTPAREN      reduce using rule 38 (Chagit -> DIGIT .)
+    ELSE            reduce using rule 38 (Chagit -> DIGIT .)
+    SEMICOLON       reduce using rule 38 (Chagit -> DIGIT .)
+
+
+state 39
+
+    (39) Chagit -> empty .
+
+    CHARACTER       reduce using rule 39 (Chagit -> empty .)
+    DIGIT           reduce using rule 39 (Chagit -> empty .)
+    LEFTPAREN       reduce using rule 39 (Chagit -> empty .)
+    BINOPS          reduce using rule 39 (Chagit -> empty .)
+    SIGNS           reduce using rule 39 (Chagit -> empty .)
+    $end            reduce using rule 39 (Chagit -> empty .)
+    THEN            reduce using rule 39 (Chagit -> empty .)
+    ASSIGN          reduce using rule 39 (Chagit -> empty .)
+    COMA            reduce using rule 39 (Chagit -> empty .)
+    TO              reduce using rule 39 (Chagit -> empty .)
+    RIGHTPAREN      reduce using rule 39 (Chagit -> empty .)
+    ELSE            reduce using rule 39 (Chagit -> empty .)
+    SEMICOLON       reduce using rule 39 (Chagit -> empty .)
+
+
+state 40
+
+    (41) DigitPlus -> DIGIT DigitPlus .
+
+    BINOPS          reduce using rule 41 (DigitPlus -> DIGIT DigitPlus .)
+    SIGNS           reduce using rule 41 (DigitPlus -> DIGIT DigitPlus .)
+    $end            reduce using rule 41 (DigitPlus -> DIGIT DigitPlus .)
+    THEN            reduce using rule 41 (DigitPlus -> DIGIT DigitPlus .)
+    RIGHTPAREN      reduce using rule 41 (DigitPlus -> DIGIT DigitPlus .)
+    COMA            reduce using rule 41 (DigitPlus -> DIGIT DigitPlus .)
+    ELSE            reduce using rule 41 (DigitPlus -> DIGIT DigitPlus .)
+    SEMICOLON       reduce using rule 41 (DigitPlus -> DIGIT DigitPlus .)
+
+
+state 41
+
+    (1) Exp -> Term Binop Exp .
+
+    $end            reduce using rule 1 (Exp -> Term Binop Exp .)
+    THEN            reduce using rule 1 (Exp -> Term Binop Exp .)
+    RIGHTPAREN      reduce using rule 1 (Exp -> Term Binop Exp .)
+    COMA            reduce using rule 1 (Exp -> Term Binop Exp .)
+    ELSE            reduce using rule 1 (Exp -> Term Binop Exp .)
+    SEMICOLON       reduce using rule 1 (Exp -> Term Binop Exp .)
+
+
+state 42
+
+    (3) Exp -> IF Exp THEN . Exp ELSE Exp
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    ELSE            reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Exp                            shift and go to state 55
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 43
+
+    (4) Exp -> LET DefPlus IN . Exp
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    $end            reduce using rule 43 (empty -> .)
+    THEN            reduce using rule 43 (empty -> .)
+    RIGHTPAREN      reduce using rule 43 (empty -> .)
+    COMA            reduce using rule 43 (empty -> .)
+    ELSE            reduce using rule 43 (empty -> .)
+    SEMICOLON       reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Exp                            shift and go to state 56
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 44
+
+    (24) DefPlus -> DefPlus Def .
+
+    IN              reduce using rule 24 (DefPlus -> DefPlus Def .)
+    CHARACTER       reduce using rule 24 (DefPlus -> DefPlus Def .)
+
+
+state 45
+
+    (23) Def -> Id ASSIGN . Exp SEMICOLON
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    SEMICOLON       reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Id                             shift and go to state 16
+    Exp                            shift and go to state 57
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    DigitPlus                      shift and go to state 17
+
+state 46
+
+    (5) Exp -> MAP IdList TO . Exp
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    $end            reduce using rule 43 (empty -> .)
+    THEN            reduce using rule 43 (empty -> .)
+    RIGHTPAREN      reduce using rule 43 (empty -> .)
+    COMA            reduce using rule 43 (empty -> .)
+    ELSE            reduce using rule 43 (empty -> .)
+    SEMICOLON       reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Exp                            shift and go to state 58
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 47
+
+    (21) PropIdList -> Id COMA . PropIdList
+    (21) PropIdList -> . Id COMA PropIdList
+    (22) PropIdList -> . Id
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+
+    CHARACTER       shift and go to state 20
+
+    Id                             shift and go to state 32
+    PropIdList                     shift and go to state 59
+
+state 48
+
+    (8) Term -> Factor LEFTPAREN ExpList . RIGHTPAREN
+
+    RIGHTPAREN      shift and go to state 60
+
+
+state 49
+
+    (15) ExpList -> PropExpList .
+
+    RIGHTPAREN      reduce using rule 15 (ExpList -> PropExpList .)
+
+
+state 50
+
+    (16) ExpList -> empty .
+    (11) Term -> empty .
+
+  ! reduce/reduce conflict for RIGHTPAREN resolved using rule 11 (Term -> empty .)
+    BINOPS          reduce using rule 11 (Term -> empty .)
+    SIGNS           reduce using rule 11 (Term -> empty .)
+    COMA            reduce using rule 11 (Term -> empty .)
+    RIGHTPAREN      reduce using rule 11 (Term -> empty .)
+
+  ! RIGHTPAREN      [ reduce using rule 16 (ExpList -> empty .) ]
+
+
+state 51
+
+    (17) PropExpList -> Exp . COMA PropExpList
+    (18) PropExpList -> Exp .
+
+    COMA            shift and go to state 61
+    RIGHTPAREN      reduce using rule 18 (PropExpList -> Exp .)
+
+
+state 52
+
+    (12) Factor -> LEFTPAREN Exp RIGHTPAREN .
+
+    LEFTPAREN       reduce using rule 12 (Factor -> LEFTPAREN Exp RIGHTPAREN .)
+    BINOPS          reduce using rule 12 (Factor -> LEFTPAREN Exp RIGHTPAREN .)
+    SIGNS           reduce using rule 12 (Factor -> LEFTPAREN Exp RIGHTPAREN .)
+    $end            reduce using rule 12 (Factor -> LEFTPAREN Exp RIGHTPAREN .)
+    THEN            reduce using rule 12 (Factor -> LEFTPAREN Exp RIGHTPAREN .)
+    RIGHTPAREN      reduce using rule 12 (Factor -> LEFTPAREN Exp RIGHTPAREN .)
+    COMA            reduce using rule 12 (Factor -> LEFTPAREN Exp RIGHTPAREN .)
+    ELSE            reduce using rule 12 (Factor -> LEFTPAREN Exp RIGHTPAREN .)
+    SEMICOLON       reduce using rule 12 (Factor -> LEFTPAREN Exp RIGHTPAREN .)
+
+
+state 53
+
+    (35) Chagit -> Chagit CHARACTER .
+
+    CHARACTER       reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    DIGIT           reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    LEFTPAREN       reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    BINOPS          reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    SIGNS           reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    $end            reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    THEN            reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    ASSIGN          reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    COMA            reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    TO              reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    RIGHTPAREN      reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    ELSE            reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+    SEMICOLON       reduce using rule 35 (Chagit -> Chagit CHARACTER .)
+
+
+state 54
+
+    (36) Chagit -> Chagit DIGIT .
+
+    CHARACTER       reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    DIGIT           reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    LEFTPAREN       reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    BINOPS          reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    SIGNS           reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    $end            reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    THEN            reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    ASSIGN          reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    COMA            reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    TO              reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    RIGHTPAREN      reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    ELSE            reduce using rule 36 (Chagit -> Chagit DIGIT .)
+    SEMICOLON       reduce using rule 36 (Chagit -> Chagit DIGIT .)
+
+
+state 55
+
+    (3) Exp -> IF Exp THEN Exp . ELSE Exp
+
+    ELSE            shift and go to state 62
+
+
+state 56
+
+    (4) Exp -> LET DefPlus IN Exp .
+
+    $end            reduce using rule 4 (Exp -> LET DefPlus IN Exp .)
+    THEN            reduce using rule 4 (Exp -> LET DefPlus IN Exp .)
+    RIGHTPAREN      reduce using rule 4 (Exp -> LET DefPlus IN Exp .)
+    COMA            reduce using rule 4 (Exp -> LET DefPlus IN Exp .)
+    ELSE            reduce using rule 4 (Exp -> LET DefPlus IN Exp .)
+    SEMICOLON       reduce using rule 4 (Exp -> LET DefPlus IN Exp .)
+
+
+state 57
+
+    (23) Def -> Id ASSIGN Exp . SEMICOLON
+
+    SEMICOLON       shift and go to state 63
+
+
+state 58
+
+    (5) Exp -> MAP IdList TO Exp .
+
+    $end            reduce using rule 5 (Exp -> MAP IdList TO Exp .)
+    THEN            reduce using rule 5 (Exp -> MAP IdList TO Exp .)
+    RIGHTPAREN      reduce using rule 5 (Exp -> MAP IdList TO Exp .)
+    COMA            reduce using rule 5 (Exp -> MAP IdList TO Exp .)
+    ELSE            reduce using rule 5 (Exp -> MAP IdList TO Exp .)
+    SEMICOLON       reduce using rule 5 (Exp -> MAP IdList TO Exp .)
+
+
+state 59
+
+    (21) PropIdList -> Id COMA PropIdList .
+
+    TO              reduce using rule 21 (PropIdList -> Id COMA PropIdList .)
+
+
+state 60
+
+    (8) Term -> Factor LEFTPAREN ExpList RIGHTPAREN .
+
+    BINOPS          reduce using rule 8 (Term -> Factor LEFTPAREN ExpList RIGHTPAREN .)
+    SIGNS           reduce using rule 8 (Term -> Factor LEFTPAREN ExpList RIGHTPAREN .)
+    $end            reduce using rule 8 (Term -> Factor LEFTPAREN ExpList RIGHTPAREN .)
+    THEN            reduce using rule 8 (Term -> Factor LEFTPAREN ExpList RIGHTPAREN .)
+    RIGHTPAREN      reduce using rule 8 (Term -> Factor LEFTPAREN ExpList RIGHTPAREN .)
+    COMA            reduce using rule 8 (Term -> Factor LEFTPAREN ExpList RIGHTPAREN .)
+    ELSE            reduce using rule 8 (Term -> Factor LEFTPAREN ExpList RIGHTPAREN .)
+    SEMICOLON       reduce using rule 8 (Term -> Factor LEFTPAREN ExpList RIGHTPAREN .)
+
+
+state 61
+
+    (17) PropExpList -> Exp COMA . PropExpList
+    (17) PropExpList -> . Exp COMA PropExpList
+    (18) PropExpList -> . Exp
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    COMA            reduce using rule 43 (empty -> .)
+    RIGHTPAREN      reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Exp                            shift and go to state 51
+    PropExpList                    shift and go to state 64
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 62
+
+    (3) Exp -> IF Exp THEN Exp ELSE . Exp
+    (1) Exp -> . Term Binop Exp
+    (2) Exp -> . Term
+    (3) Exp -> . IF Exp THEN Exp ELSE Exp
+    (4) Exp -> . LET DefPlus IN Exp
+    (5) Exp -> . MAP IdList TO Exp
+    (6) Term -> . Bool
+    (7) Term -> . Unop Term
+    (8) Term -> . Factor LEFTPAREN ExpList RIGHTPAREN
+    (9) Term -> . Factor
+    (10) Term -> . Int
+    (11) Term -> . empty
+    (26) Bool -> . BOOLEANS
+    (27) Unop -> . Sign
+    (28) Unop -> . WAVE
+    (12) Factor -> . LEFTPAREN Exp RIGHTPAREN
+    (13) Factor -> . Prim
+    (14) Factor -> . Id
+    (40) Int -> . DigitPlus
+    (43) empty -> .
+    (29) Sign -> . SIGNS
+    (32) Prim -> . PRIMWORDS
+    (33) Id -> . CHARACTER Chagit
+    (34) Id -> . CHARACTER
+    (41) DigitPlus -> . DIGIT DigitPlus
+    (42) DigitPlus -> . DIGIT
+
+  ! shift/reduce conflict for SIGNS resolved as shift
+    IF              shift and go to state 3
+    LET             shift and go to state 4
+    MAP             shift and go to state 5
+    BOOLEANS        shift and go to state 12
+    WAVE            shift and go to state 14
+    LEFTPAREN       shift and go to state 9
+    BINOPS          reduce using rule 43 (empty -> .)
+    $end            reduce using rule 43 (empty -> .)
+    THEN            reduce using rule 43 (empty -> .)
+    RIGHTPAREN      reduce using rule 43 (empty -> .)
+    COMA            reduce using rule 43 (empty -> .)
+    ELSE            reduce using rule 43 (empty -> .)
+    SEMICOLON       reduce using rule 43 (empty -> .)
+    SIGNS           shift and go to state 18
+    PRIMWORDS       shift and go to state 19
+    CHARACTER       shift and go to state 20
+    DIGIT           shift and go to state 21
+
+  ! SIGNS           [ reduce using rule 43 (empty -> .) ]
+
+    Exp                            shift and go to state 65
+    Term                           shift and go to state 2
+    Bool                           shift and go to state 6
+    Unop                           shift and go to state 7
+    Factor                         shift and go to state 8
+    Int                            shift and go to state 10
+    empty                          shift and go to state 11
+    Sign                           shift and go to state 13
+    Prim                           shift and go to state 15
+    Id                             shift and go to state 16
+    DigitPlus                      shift and go to state 17
+
+state 63
+
+    (23) Def -> Id ASSIGN Exp SEMICOLON .
+
+    IN              reduce using rule 23 (Def -> Id ASSIGN Exp SEMICOLON .)
+    CHARACTER       reduce using rule 23 (Def -> Id ASSIGN Exp SEMICOLON .)
+
+
+state 64
+
+    (17) PropExpList -> Exp COMA PropExpList .
+
+    RIGHTPAREN      reduce using rule 17 (PropExpList -> Exp COMA PropExpList .)
+
+
+state 65
+
+    (3) Exp -> IF Exp THEN Exp ELSE Exp .
+
+    $end            reduce using rule 3 (Exp -> IF Exp THEN Exp ELSE Exp .)
+    THEN            reduce using rule 3 (Exp -> IF Exp THEN Exp ELSE Exp .)
+    RIGHTPAREN      reduce using rule 3 (Exp -> IF Exp THEN Exp ELSE Exp .)
+    COMA            reduce using rule 3 (Exp -> IF Exp THEN Exp ELSE Exp .)
+    ELSE            reduce using rule 3 (Exp -> IF Exp THEN Exp ELSE Exp .)
+    SEMICOLON       reduce using rule 3 (Exp -> IF Exp THEN Exp ELSE Exp .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SIGNS in state 0 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 3 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 7 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 9 resolved as shift
+WARNING: shift/reduce conflict for CHARACTER in state 20 resolved as shift
+WARNING: shift/reduce conflict for DIGIT in state 20 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 22 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 34 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 42 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 43 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 45 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 46 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 61 resolved as shift
+WARNING: shift/reduce conflict for SIGNS in state 62 resolved as shift
+WARNING: reduce/reduce conflict in state 20 resolved using rule (Id -> CHARACTER)
+WARNING: rejected rule (empty -> <empty>) in state 20
+WARNING: reduce/reduce conflict in state 50 resolved using rule (Term -> empty)
+WARNING: rejected rule (ExpList -> empty) in state 50
+WARNING: Rule (ExpList -> empty) is never reduced
